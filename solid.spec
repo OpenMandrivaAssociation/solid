@@ -13,12 +13,21 @@ License: GPL
 Group: System/Libraries
 BuildRequires: cmake
 BuildRequires: pkgconfig(Qt5Core)
+BuildRequires: pkgconfig(Qt5Xml)
+BuildRequires: pkgconfig(Qt5Widgets)
+BuildRequires: pkgconfig(Qt5Concurrent)
+BuildRequires: pkgconfig(Qt5Test)
+BuildRequires: pkgconfig(Qt5Qml)
+BuildRequires: flex bison
 BuildRequires: qmake5
+BuildRequires: extra-cmake-modules5
 Requires: %{libname} = %{EVRD}
 %if "%_lib" == "lib64"
 BuildRequires: devel(libKF5DBusAddons(64bit))
+BuildRequires: devel(libHUpnp(64bit))
 %else
 BuildRequires: devel(libKF5DBusAddons)
+BuildRequires: devel(libHUpnp)
 %endif
 
 %description
