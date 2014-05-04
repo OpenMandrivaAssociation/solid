@@ -4,7 +4,7 @@
 %define debug_package %{nil}
 
 Name: solid
-Version: 4.97.0
+Version: 4.98.0
 Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/unstable/frameworks/%{version}/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
@@ -61,6 +61,7 @@ mkdir -p %{buildroot}%{_libdir}/qt5
 mv %{buildroot}%{_prefix}/mkspecs %{buildroot}%{_libdir}/qt5
 
 %files
+%{_bindir}/solid-hardware
 %{_libdir}/qml/org/kde/solid
 %{_datadir}/dbus-1/interfaces/*.xml
 
