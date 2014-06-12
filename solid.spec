@@ -18,6 +18,7 @@ BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5Test)
 BuildRequires: pkgconfig(Qt5Qml)
+BuildRequires: pkgconfig(libudev)
 BuildRequires: flex bison
 BuildRequires: qmake5
 BuildRequires: extra-cmake-modules5
