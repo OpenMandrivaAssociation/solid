@@ -4,8 +4,8 @@
 %define debug_package %{nil}
 
 Name: solid
-Version: 4.100.0
-Release: 2
+Version: 5.0.0
+Release: 1
 Source0: http://ftp5.gwdg.de/pub/linux/kde/unstable/frameworks/%{version}/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
 URL: http://kde.org/
