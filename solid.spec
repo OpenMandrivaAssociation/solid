@@ -12,6 +12,8 @@ Summary: The KDE Frameworks 5 hardware access library
 URL: http://kde.org/
 License: GPL
 Group: System/Libraries
+# (tpg) sort cores
+Patch0: sort_cores.patch
 BuildRequires: cmake(ECM)
 BuildRequires: media-player-info
 BuildRequires: pkgconfig(Qt5Core)
@@ -48,6 +50,7 @@ Development files (Headers etc.) for %{name}.
 
 %prep
 %setup -q
+%apply_patches
 %cmake_kde5
 
 %build
