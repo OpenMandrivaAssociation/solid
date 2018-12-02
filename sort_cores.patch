@@ -1,16 +1,7 @@
---- solid-5.21.0.old/src/solid/devices/frontend/devicemanager_p.h	2016-04-04 00:08:10.000000000 +0300
-+++ solid-5.21.0.new/src/solid/devices/frontend/devicemanager_p.h	2016-04-15 04:02:42.751456230 +0300
-@@ -29,6 +29,7 @@
- #include <QtCore/QPointer>
- #include <QtCore/QSharedData>
- #include <QtCore/QThreadStorage>
-+#include <QtCore/QRegularExpression>
- 
- namespace Solid
- {
---- solid-5.21.0.old/src/solid/devices/frontend/devicemanager.cpp	2016-04-04 00:08:10.000000000 +0300
-+++ solid-5.21.0.new/src/solid/devices/frontend/devicemanager.cpp	2016-04-15 03:51:35.213357947 +0300
-@@ -114,8 +114,24 @@
+diff -up solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp.0000~ solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp
+--- solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp.0000~	2018-12-01 16:01:26.000000000 +0100
++++ solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp	2018-12-02 00:41:03.122826034 +0100
+@@ -114,8 +114,24 @@ QList<Solid::Device> Solid::Device::list
  
          QStringList udis = backend->devicesFromQuery(parentUdi, type);
  
@@ -37,3 +28,14 @@
          }
      }
  
+diff -up solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h.0000~ solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h
+--- solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h.0000~	2018-12-02 00:41:03.122826034 +0100
++++ solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h	2018-12-02 07:34:03.246679303 +0100
+@@ -29,6 +29,7 @@
+ #include <QPointer>
+ #include <QSharedData>
+ #include <QThreadStorage>
++#include <QRegularExpression>
+ 
+ namespace Solid
+ {
