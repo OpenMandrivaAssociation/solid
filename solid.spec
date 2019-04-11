@@ -28,6 +28,7 @@ BuildRequires: pkgconfig(libudev)
 BuildRequires: flex
 BuildRequires: bison
 # For QCH format docs
+BuildRequires: doxygen
 BuildRequires: qt5-assistant
 Requires: udisks
 Requires: %{libname} = %{EVRD}
