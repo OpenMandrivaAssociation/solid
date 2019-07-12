@@ -5,7 +5,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: solid
-Version:	5.59.0
+Version:	5.60.0
 Release:	1
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
@@ -79,7 +79,7 @@ for i in .%{_datadir}/locale/*/LC_MESSAGES/*.qm; do
 done
 
 %files -f %{name}.lang
-%{_sysconfdir}/xdg/solid.categories
+%{_datadir}/qlogging-categories5/solid.categories
 %{_bindir}/solid-hardware5
 %{_libdir}/qt5/qml/org/kde/solid
 
