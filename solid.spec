@@ -64,8 +64,8 @@ Developer documentation for %{name} for use with Qt Assistant
 %autosetup -p1
 %cmake_kde5 \
 	-DWITH_NEW_POWER_ASYNC_API=ON \
-    -DWITH_NEW_POWER_ASYNC_FREEDESKTOP=ON \
-    -DWITH_NEW_SOLID_JOB=ON
+	-DWITH_NEW_POWER_ASYNC_FREEDESKTOP=ON \
+	-DWITH_NEW_SOLID_JOB=ON
 
 %build
 %ninja -C build
