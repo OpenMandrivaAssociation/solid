@@ -6,7 +6,7 @@
 
 Name: solid
 Version:	5.70.0
-Release:	1
+Release:	2
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
 URL: http://kde.org/
@@ -62,7 +62,10 @@ Developer documentation for %{name} for use with Qt Assistant
 
 %prep
 %autosetup -p1
-%cmake_kde5
+%cmake_kde5 \
+	-DWITH_NEW_POWER_ASYNC_API=ON \
+    -DWITH_NEW_POWER_ASYNC_FREEDESKTOP=ON \
+    -DWITH_NEW_SOLID_JOB=ON
 
 %build
 %ninja -C build
@@ -70,7 +73,7 @@ Developer documentation for %{name} for use with Qt Assistant
 %install
 %ninja_install -C build
 
-L="`pwd`/%{name}.lang"
+L="$(pwd)/%{name}.lang"
 cd %{buildroot}
 for i in .%{_datadir}/locale/*/LC_MESSAGES/*.qm; do
 	LNG=`echo $i |cut -d/ -f5`
