@@ -1,0 +1,11 @@
+diff -up solid-5.71.0/autotests/fakeUpower.cpp.omv~ solid-5.71.0/autotests/fakeUpower.cpp
+--- solid-5.71.0/autotests/fakeUpower.cpp.omv~	2020-06-07 02:15:35.047015318 +0200
++++ solid-5.71.0/autotests/fakeUpower.cpp	2020-06-07 02:15:44.454080829 +0200
+@@ -7,6 +7,7 @@
+ #include "fakeUpower.h"
+ 
+ #include <QDBusConnection>
++#include <QDBusPendingCall>
+ #include <qdbusmessage.h>
+ 
+ FakeUpower::FakeUpower(QObject* parent) : QObject(parent),

@@ -1,16 +1,16 @@
-diff -up solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp.0000~ solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp
---- solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp.0000~	2018-12-01 16:01:26.000000000 +0100
-+++ solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp	2018-12-02 00:41:03.122826034 +0100
-@@ -114,8 +114,24 @@ QList<Solid::Device> Solid::Device::list
+diff -up solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp.1~ solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp
+--- solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp.1~	2020-06-07 01:39:08.147668455 +0200
++++ solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp	2020-06-07 02:04:53.640546286 +0200
+@@ -100,9 +100,25 @@ QList<Solid::Device> Solid::Device::list
+         }
  
-         QStringList udis = backend->devicesFromQuery(parentUdi, type);
- 
--        Q_FOREACH (const QString &udi, udis) {
+         const QStringList udis = backend->devicesFromQuery(parentUdi, type);
+-        for (const QString &udi : udis) {
 -            list.append(Device(udi));
 +        if(type==DeviceInterface::Type::Processor) {
 +            QMap<int, QString> coresMap;
 +            QRegularExpression re("cpu([0-9]+)");
-+            Q_FOREACH (const QString &udi, udis) {
++            for (const QString &udi : udis) {
 +                QRegularExpressionMatch match = re.match(udi);
 +                if(match.hasMatch()) {
 +                     QString matched = match.captured(1);
@@ -20,18 +20,19 @@ diff -up solid-5.53.0/src/solid/devices/frontend/devicemanager.cpp.0000~ solid-5
 +            for(QMap<int, QString>::const_iterator ii=coresMap.constBegin(); ii != coresMap.constEnd(); ii++) {
 +                list.append(Device(ii.value()));
 +            }
-+        }
+         }
 +        else  {
-+            Q_FOREACH (const QString &udi, udis) {
++            for (const QString &udi : udis) {
 +                list.append(Device(udi));
 +            }
-         }
++	}
      }
  
-diff -up solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h.0000~ solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h
---- solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h.0000~	2018-12-02 00:41:03.122826034 +0100
-+++ solid-5.53.0/src/solid/devices/frontend/devicemanager_p.h	2018-12-02 07:34:03.246679303 +0100
-@@ -29,6 +29,7 @@
+     return list;
+diff -up solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h.1~ solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h
+--- solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h.1~	2020-06-06 22:14:05.000000000 +0200
++++ solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h	2020-06-07 01:39:08.147668455 +0200
+@@ -15,6 +15,7 @@
  #include <QPointer>
  #include <QSharedData>
  #include <QThreadStorage>
