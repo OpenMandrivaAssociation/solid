@@ -6,7 +6,7 @@
 
 Name: solid
 Version:	5.77.0
-Release:	1
+Release:	2
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
 URL: http://kde.org/
@@ -26,6 +26,8 @@ BuildRequires: pkgconfig(Qt5Qml)
 BuildRequires: pkgconfig(Qt5Quick)
 BuildRequires: pkgconfig(Qt5DBus)
 BuildRequires: pkgconfig(libudev)
+BuildRequires: pkgconfig(libplist-2.0)
+BuildRequires: pkgconfig(libimobiledevice-1.0)
 BuildRequires: flex
 BuildRequires: bison
 # For QCH format docs
@@ -77,7 +79,7 @@ Developer documentation for %{name} for use with Qt Assistant
 L="$(pwd)/%{name}.lang"
 cd %{buildroot}
 for i in .%{_datadir}/locale/*/LC_MESSAGES/*.qm; do
-	LNG=`echo $i |cut -d/ -f5`
+	LNG=$(echo $i |cut -d/ -f5)
 	echo -n "%lang($LNG) " >>$L
 	echo $i |cut -b2- >>$L
 done
