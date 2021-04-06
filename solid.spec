@@ -5,7 +5,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: solid
-Version:	5.80.0
+Version:	5.81.0
 Release:	1
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
@@ -14,7 +14,6 @@ License: GPL
 Group: System/Libraries
 # (tpg) sort cores
 Patch0: sort_cores.patch
-Patch1:	solid-5.71.0-compile.patch
 BuildRequires: cmake(ECM)
 BuildRequires: media-player-info
 BuildRequires: pkgconfig(Qt5Core)
