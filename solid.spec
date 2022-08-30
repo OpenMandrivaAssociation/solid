@@ -5,7 +5,7 @@
 
 Name: solid
 Version:	5.97.0
-Release:	1
+Release:	2
 Source0: http://download.kde.org/%{stable}/frameworks/%(echo %{version} |cut -d. -f1-2)/%{name}-%{version}.tar.xz
 Summary: The KDE Frameworks 5 hardware access library
 URL: http://kde.org/
@@ -32,9 +32,10 @@ BuildRequires: bison
 # For QCH format docs
 BuildRequires: doxygen
 BuildRequires: qt5-assistant
-Requires: udisks
 Requires: %{libname} = %{EVRD}
-Requires: media-player-info
+Recommends: udisks
+Recommends: upower
+Recommends: media-player-info
 
 %description
 The KDE Frameworks 5 hardware access library.
