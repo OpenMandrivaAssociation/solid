@@ -1,42 +1,40 @@
-diff -up solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp.1~ solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp
---- solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp.1~	2020-06-07 01:39:08.147668455 +0200
-+++ solid-5.71.0/src/solid/devices/frontend/devicemanager.cpp	2020-06-07 02:04:53.640546286 +0200
-@@ -100,9 +100,25 @@ QList<Solid::Device> Solid::Device::list
+diff -up solid-6.28.0/src/solid/devices/frontend/devicemanager.cpp.1~ solid-6.28.0/src/solid/devices/frontend/devicemanager.cpp
+--- solid-6.28.0/src/solid/devices/frontend/devicemanager.cpp.1~
++++ solid-6.28.0/src/solid/devices/frontend/devicemanager.cpp
+@@ -88,8 +88,23 @@ QList<Solid::Device> Solid::Device::listFromType(const DeviceInterface::Type &type, const QString &parentUdi)
          }
  
-         const QStringList udis = backend->devicesFromQuery(parentUdi, type);
--        for (const QString &udi : udis) {
+         const auto udis = backend->devicesFromQuery(parentUdi, type);
+-        for (const auto &udi : udis) {
 -            list.append(Device(udi));
-+        if(type==DeviceInterface::Type::Processor) {
++        if (type == DeviceInterface::Type::Processor) {
 +            QMap<int, QString> coresMap;
-+            QRegularExpression re("cpu([0-9]+)");
-+            for (const QString &udi : udis) {
++            QRegularExpression re(QStringLiteral("cpu([0-9]+)"));
++            for (const auto &udi : udis) {
 +                QRegularExpressionMatch match = re.match(udi);
-+                if(match.hasMatch()) {
-+                     QString matched = match.captured(1);
-+                     coresMap[matched.toUInt()] = udi;
++                if (match.hasMatch()) {
++                    QString matched = match.captured(1);
++                    coresMap[matched.toUInt()] = udi;
 +                }
 +            }
-+            for(QMap<int, QString>::const_iterator ii=coresMap.constBegin(); ii != coresMap.constEnd(); ii++) {
++            for (auto ii = coresMap.constBegin(); ii != coresMap.constEnd(); ++ii) {
 +                list.append(Device(ii.value()));
 +            }
-         }
-+        else  {
-+            for (const QString &udi : udis) {
++        } else {
++            for (const auto &udi : udis) {
 +                list.append(Device(udi));
 +            }
-+	}
+         }
      }
  
-     return list;
-diff -up solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h.1~ solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h
---- solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h.1~	2020-06-06 22:14:05.000000000 +0200
-+++ solid-5.71.0/src/solid/devices/frontend/devicemanager_p.h	2020-06-07 01:39:08.147668455 +0200
-@@ -15,6 +15,7 @@
+diff -up solid-6.28.0/src/solid/devices/frontend/devicemanager_p.h.1~ solid-6.28.0/src/solid/devices/frontend/devicemanager_p.h
+--- solid-6.28.0/src/solid/devices/frontend/devicemanager_p.h.1~
++++ solid-6.28.0/src/solid/devices/frontend/devicemanager_p.h
+@@ -13,6 +13,7 @@
+ 
+ #include <QHash>
  #include <QPointer>
++#include <QRegularExpression>
  #include <QSharedData>
  #include <QThreadStorage>
-+#include <QRegularExpression>
  
- namespace Solid
- {
